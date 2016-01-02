@@ -11,14 +11,14 @@ using namespace std;
 class source_matrix
 {
 public:
-    source_matrix(string name, int *extra);
+    source_matrix(string name, int *extra, string );
     void mix_columns(int inv);
     void shift(int inv);
     vector < char >* get_master();
-    void save_file(string file, int extra, int inv);
+    void save_file(string file, int extra, int inv, string);
 
 private:
-    vector < char > master_matrix;
+    vector < char > *master_matrix=new vector <char>;
     char temp1,temp2,temp3;
     int count=0;
 

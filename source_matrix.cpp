@@ -5,19 +5,22 @@
 #include<vector>
 #include<stdlib.h>
 #include<bitset>
+#include<QDebug>
 using namespace std;
 
-source_matrix::source_matrix(string name, int *extra){
-    ifstream file(name);
+source_matrix::source_matrix(string name, int *extra, string path){
+    ifstream file(path);
+cout<<path;
     while(file.get(c)){
-
-        master_matrix.push_back(c);
+//qDebug()<<"alex";
+        master_matrix->push_back(c);
         ++count;
-
+cout<<c;
     }
+
     *extra=0;
     for(int i=count%16 ; i<16 ;i++){
-        master_matrix.push_back(' ');
+        master_matrix->push_back(' ');
         ++(*extra);
     }
 file.close();
@@ -60,7 +63,7 @@ unsigned char source_matrix::three(char i){
 
 void source_matrix::mix_columns( int inv){
      if(inv==0){
-         for(auto i=master_matrix.begin() ; i!=master_matrix.end(); i=i+4 ){
+         for(auto i=master_matrix->begin() ; i!=master_matrix->end(); i=i+4 ){
              a=*i;
              b=*(i+1);
              c=*(i+2);
@@ -80,7 +83,7 @@ void source_matrix::mix_columns( int inv){
 
      }
      else{
-         for(auto i=master_matrix.begin() ; i!=master_matrix.end(); i=i+4 ){
+         for(auto i=master_matrix->begin() ; i!=master_matrix->end(); i=i+4 ){
              a=*i;
              b=*(i+1);
              c=*(i+2);
@@ -102,7 +105,7 @@ void source_matrix::mix_columns( int inv){
 
  void source_matrix::shift(int inv){
      if(inv==0){
-         for(auto i=master_matrix.begin() ; i!=master_matrix.end() ; i+=16){
+         for(auto i=master_matrix->begin() ; i!=master_matrix->end() ; i+=16){
 
              //row 2
              temp1=*(i+4);
@@ -131,7 +134,7 @@ void source_matrix::mix_columns( int inv){
      }
 
      else{
-         for(auto i=master_matrix.begin() ; i!=master_matrix.end() ; i+=16){
+         for(auto i=master_matrix->begin() ; i!=master_matrix->end() ; i+=16){
              //row 2
              temp1=*(i+7);
              *(i+7)=*(i+6);
@@ -158,24 +161,21 @@ void source_matrix::mix_columns( int inv){
          }
      }
  }
-    void source_matrix::save_file(string file, int extra ,int inv){
+    void source_matrix::save_file(string file, int extra ,int inv, string path){
 
-        ofstream myfile;
-        if(inv==1){
-        myfile.open("d-"+file);
-        }
-        else{myfile.open("e-"+file);}
+        ofstream myfile(path);
+
+        //myfile.open(file);
+
+
         string text;
-        if(inv==1){
-        for(auto i=master_matrix.begin(); i!=master_matrix.end()-extra; ++i){
+
+        for(auto i=master_matrix->begin(); i!=master_matrix->end()-extra; ++i){
+            cout<<"adsad";
             myfile<<*i;
             //mix_columns(&master_matrix,0);
-        }
-        }
-        else{
-            for(auto i=master_matrix.begin(); i!=master_matrix.end(); ++i){
-                myfile<<*i;
-            }
+
+
         }
         //cout<<text;
         //myfile<<text;
@@ -183,5 +183,5 @@ void source_matrix::mix_columns( int inv){
     }
 
  vector<char>* source_matrix::get_master() {
-     return &master_matrix;
+     return master_matrix;
  }

@@ -1,8 +1,6 @@
 #ifndef KEY_MATRIX_H
 #define KEY_MATRIX_H
 
-//#include "key_matrix_global.h"
-
 #include<iostream>
 #include<fstream>
 #include<string>
