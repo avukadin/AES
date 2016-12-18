@@ -10,3 +10,5 @@ About the Software:
 Enter the location and file name for the input and output files. The password is the key used for the
 encryption/decryption algorithm. For more information, check 'Advanced Encryption Standard and Ring Theory'
 by Clifford Berger http://buzzard.ups.edu/courses/2013spring/projects/berger-aes-ups-434-2013.pdf. 
+
+sourcematrix.cpp contains the primary code.
